@@ -19,10 +19,6 @@ jobs:
       with:
         repository: azure/azure-rest-api-specs
         path: azure-rest-api-specs
-    - run: |
-       set -ex
-       ls 
-       exit 1
     - uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
@@ -31,5 +27,6 @@ jobs:
     - uses: Swatinem/rust-cache@v1
     - run: |
         set -ex
+        mv azure-rest-api-specs ../
         (cd services/autorust; cargo run --release --example gen_svc; cargo run --release --example gen_mgmt)
         (cd services; cargo fmt && cargo check)
