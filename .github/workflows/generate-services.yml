@@ -1,0 +1,37 @@
+name: Generate Services Crates
+
+on:
+  workflow_dispatch:
+    inputs:
+      alternate_version:
+        description: "Alternate Version"
+        required: true
+
+env:
+  # the goal is to remove warnings from the generated code
+  # https://github.com/Azure/azure-sdk-for-rust/issues/553
+  RUSTFLAGS: --deny warnings --allow unused_attributes --allow unreachable-code --allow unused-assignments --allow dead-code
+  CARGO_INCREMENTAL: 0
+
+jobs:
+  generate-services:
+    name: Generate Services
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+      with:
+        repository: azure/azure-rest-api-specs
+    
+      with:
+        repository: azure/azure-rest-api-specs
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        override: true
+    - uses: Swatinem/rust-cache@v1
+    - bash: |
+        set -ex
+        (cd services/autorust; cargo run --release --example gen_svc; cargo run --release --example gen_mgmt)
+        (cd services; cargo fmt && cargo check)
