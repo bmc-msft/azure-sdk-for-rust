@@ -23,6 +23,11 @@ jobs:
       with:
         repository: azure/azure-rest-api-specs
         path: azure-rest-api-specs
+    - run: |
+       set -ex
+       ls
+       ls ..
+       exit 1
     - uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
