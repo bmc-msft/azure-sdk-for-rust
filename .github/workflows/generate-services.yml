@@ -5,7 +5,7 @@ on:
     inputs:
       alternate_version:
         description: "Alternate Version"
-        required: true
+        required: false
 
 env:
   # the goal is to remove warnings from the generated code
