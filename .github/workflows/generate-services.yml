@@ -31,7 +31,7 @@ jobs:
         profile: minimal
         override: true
     - uses: Swatinem/rust-cache@v1
-    - bash: |
+    - run: |
         set -ex
         (cd services/autorust; cargo run --release --example gen_svc; cargo run --release --example gen_mgmt)
         (cd services; cargo fmt && cargo check)
