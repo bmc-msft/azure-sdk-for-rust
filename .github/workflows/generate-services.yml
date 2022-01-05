@@ -22,9 +22,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         repository: azure/azure-rest-api-specs
-    
-      with:
-        repository: azure/azure-rest-api-specs
     - uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
