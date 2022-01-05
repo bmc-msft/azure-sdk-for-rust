@@ -2,10 +2,6 @@ name: Generate Services Crates
 
 on:
   workflow_dispatch:
-    inputs:
-      alternate_version:
-        description: "Alternate Version"
-        required: false
 
 env:
   # the goal is to remove warnings from the generated code
